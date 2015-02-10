@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<div class="container">
+	<h1>Show me your moves!</h1>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="keyboard.js"></script>
+<script>
+window.addEventListener("keydown", function(e) {
+    e.preventDefault();
+}, false);
+$(function() {
+	var $demoReadout;
+
+	$demoReadout = $('.demoReadout');
+	$(document).on('keydown', function(){
+		updateReadout();
+		$(window).scrollTop($(document).height());
+		while ($('.container').children().length > 12){
+			$('.container').children()[1].remove();
+		}
+	});
+	// $(document).on('keyup', updateReadout);
+
+	function updateReadout() {
+		setTimeout(function() {
+			var keys, keysString, comboString;
+
+			keys = KeyboardJS.activeKeys();
+			if(keys.length) {
+			// 	keysString = keys.join(' + ');
+			// }
+
+			// if(keys.length) {
+				keysString = '';
+				for (var i = 0; i < keys.length; i++){
+					keysString += "<span>" + keys[i] + "</span>";
+				}
+			}
+
+			$('.container').append('<div class="combo">' + keysString + '</div>');
+		}, 0);
+	}
+});
+</script>
+</body>
+</html>

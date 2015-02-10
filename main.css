@@ -1,0 +1,29 @@
+html, body{
+	margin: 0;
+	font-family: helvetica;
+}
+
+.container{
+	text-align: center;
+}
+
+.combo{
+	margin: 10px 0px;
+}
+
+.combo span{
+	display: inline-block;
+	min-width: 25px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	margin: 0px 5px;
+	background-color: #f0f0f0;
+	padding: 10px;
+	font-family: helvetica;
+	font-size: 14pt;
+	border-radius: 25px;
+	vertical-align: middle;
+	font-weight: bold;
+	text-transform: uppercase;
+}
