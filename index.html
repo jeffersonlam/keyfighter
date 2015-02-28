@@ -18,17 +18,14 @@
 		</div>
 	</div>
 	<div class="audio">
-		<audio id="music" controls loop autoplay>
-			<source src="https://ia801701.us.archive.org/29/items/GuileTheme/Guile%20Theme.ogg" type="audio/ogg">
-			Your browser does not support the audio element.
-		</audio>
-		<span id="sfx1"></span>
-		<span id="sfx2"></span>
-		<span id="sfx3"></span>
-		<span id="sfx4"></span>
-		<span id="sfx5"></span>
-		<span id="sfx6"></span>
-		<span id="sfx7"></span>
+		<audio id="music" src="https://ia801701.us.archive.org/29/items/GuileTheme/Guile%20Theme.ogg" type="audio/ogg" controls loop autoplay></audio>
+		<audio id="sfx1" src="" autoplay></audio>
+		<audio id="sfx2" src="" autoplay></audio>
+		<audio id="sfx3" src="" autoplay></audio>
+		<audio id="sfx4" src="" autoplay></audio>
+		<audio id="sfx5" src="" autoplay></audio>
+		<audio id="sfx6" src="" autoplay></audio>
+		<audio id="sfx7" src="" autoplay></audio>
 	</div>
 </div>
 <footer>
@@ -39,18 +36,17 @@ Made by <a href="http://jeffersonlam.github.io">Jefferson Lam</a> &bull; <a href
 <script type="text/javascript" src="keyboard.js"></script>
 <script>
 $(document).ready(function() {
+	var keys, keysString;
 	var sounds = ['1.wav', '2.wav', '3.wav', '4.wav', '5.wav', '6.wav', '7.wav'];
 	var konami = ['&#9650;', '&#9650;', '&#9660;', '&#9660;', '&#9664;', '&#9654;', '&#9664;', '&#9654;', 'b', 'a'];
 	var kI = 0;
-	var keys, keysString, comboString;
 	var num = 1;
 	var music = document.getElementById("music");
 	music.volume = 0.5;
 
 	$(document).on('keydown', function(e){
 		if (e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40){
-			var sound = sounds[Math.floor(Math.random()*sounds.length)];
-			playSound(sound);
+			playRandomSound();
 		}
 		updateReadout();
 	});
@@ -91,9 +87,10 @@ $(document).ready(function() {
 		}, 0);
 	}
 
-	function playSound(soundfile) {
-		document.getElementById("sfx"+num++).innerHTML = "<embed src=\"sounds/"+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
-		if (num==7) num = 1;
+	function playRandomSound() {
+		var sound = "sounds/" + sounds[Math.floor(Math.random()*sounds.length)];
+		$("#sfx"+num++).attr("src", sound);
+		if (num>7) num = 1;
 	}
 	window.addEventListener("keydown", function(e) {
 	    e.preventDefault();
