@@ -1,53 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="main.css">
+	<title>Key Fighter</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/icomoon.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <div class="container">
-	<h1>Show me your moves!</h1>
+	<h1>KEYBOARD FIGHTER</h1>
+	<span id="volume-control" class="icon-volume-high"></span>
+	<div class="combos">
+		<div class="combo">
+			<span>&#9660;</span>
+			<span>&#9654;</span>
+			<span>A</span>
+		</div>
+	</div>
+	<div class="audio">
+		<audio id="music" controls loop autoplay>
+			<source src="https://ia801701.us.archive.org/29/items/GuileTheme/Guile%20Theme.ogg" type="audio/ogg">
+			<!-- <source src="https://ia801701.us.archive.org/29/items/GuileTheme/Guile%20Theme.mp3" type="audio/mpeg"> -->
+			Your browser does not support the audio element.
+		</audio>
+		<span id="sfx1"></span>
+		<span id="sfx2"></span>
+		<span id="sfx3"></span>
+		<span id="sfx4"></span>
+		<span id="sfx5"></span>
+		<span id="sfx6"></span>
+		<span id="sfx7"></span>
+	</div>
 </div>
+<footer>
+Made by Jefferson Lam | github
+</footer>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="keyboard.js"></script>
 <script>
-window.addEventListener("keydown", function(e) {
-    e.preventDefault();
-}, false);
-$(function() {
-	var $demoReadout;
+$(document).ready(function() {
+	var sounds = ['1.wav', '2.wav', '3.wav', '4.wav', '5.wav', '6.wav', '7.wav'];
+	var konami = ['&#9650;', '&#9650;', '&#9660;', '&#9660;', '&#9664;', '&#9654;', '&#9664;', '&#9654;', 'b', 'a'];
+	var kI = 0;
+	var keys, keysString, comboString;
+	var music = document.getElementById("music");
+	music.volume = 0.5;
 
-	$demoReadout = $('.demoReadout');
-	$(document).on('keydown', function(){
+	$(document).on('keydown', function(e){
+		if (e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40){
+			var sound = sounds[Math.floor(Math.random()*sounds.length)];
+			playSound(sound);
+		}
 		updateReadout();
-		$(window).scrollTop($(document).height());
-		while ($('.container').children().length > 12){
-			$('.container').children()[1].remove();
+	});
+
+	$('#volume-control').click(function(){
+		if (music.paused){
+			music.play();
+			$(this)[0].className = 'icon-volume-high';
+		} else {
+			music.pause();
+			$(this)[0].className = 'icon-volume-mute2';
 		}
 	});
-	// $(document).on('keyup', updateReadout);
 
 	function updateReadout() {
 		setTimeout(function() {
-			var keys, keysString, comboString;
-
 			keys = KeyboardJS.activeKeys();
 			if(keys.length) {
-			// 	keysString = keys.join(' + ');
-			// }
-
-			// if(keys.length) {
 				keysString = '';
 				for (var i = 0; i < keys.length; i++){
-					keysString += "<span>" + keys[i] + "</span>";
+					keysString += '<span>' + keys[i] + '</span>';
+					if(keys[i] === konami[kI]) {
+						if(kI < konami.length - 1) {
+							kI += 1;
+						} else {
+							// window.location = "http://en.wikipedia.org/wiki/Konami_Code";
+							console.log('kewl');
+						}
+					} else {
+						kI = 0;
+					}
 				}
 			}
-
-			$('.container').append('<div class="combo">' + keysString + '</div>');
+			if (keysString === undefined) return;
+			while ($('.combos').children().length > 9){
+				$('.combos').children()[0].remove();
+			}
+			$('.combos').append('<div class="combo">' + keysString + '</div>');
 		}, 0);
 	}
 });
+window.addEventListener("keydown", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}, false);
+
+var num = 1;
+function playSound(soundfile) {
+	document.getElementById("sfx"+num++).innerHTML = "<embed src=\"sounds/"+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
+	if (num==7) num = 1;
+}
 </script>
 </body>
 </html>

@@ -235,10 +235,10 @@
 			"34": ["pagedown"],
 			"35": ["end"],
 			"36": ["home"],
-			"37": ["left"],
-			"38": ["up"],
-			"39": ["right"],
-			"40": ["down"],
+			"37": ["&#9664;"], //left
+			"38": ["&#9650;"], //up
+			"39": ["&#9654;"], //right
+			"40": ["&#9660;"], //down
 			"41": ["select"],
 			"42": ["printscreen"],
 			"43": ["execute"],
@@ -248,6 +248,7 @@
 			"47": ["help"],
 			"91": ["command"],
 			"92": ["command"],
+			"93": ["command"],
 			"145": ["scroll"],
 			"186": [";"],
 			"187": ["="],
@@ -308,34 +309,34 @@
 		},
 		"macros": [
 
-			//secondary key symbols
-			['shift + `', ["tilde", "~"]],
-			['shift + 1', ["exclamation", "exclamationpoint", "!"]],
-			['shift + 2', ["at", "@"]],
-			['shift + 3', ["number", "#"]],
-			['shift + 4', ["dollar", "dollars", "dollarsign", "$"]],
-			['shift + 5', ["percent", "%"]],
-			['shift + 6', ["caret", "^"]],
-			['shift + 7', ["ampersand", "and", "&"]],
-			['shift + 8', ["asterisk", "*"]],
-			['shift + 9', ["openparen", "("]],
-			['shift + 0', ["closeparen", ")"]],
-			['shift + -', ["underscore", "_"]],
-			['shift + =', ["plus", "+"]],
-			['shift + (', ["opencurlybrace", "opencurlybracket", "{"]],
-			['shift + )', ["closecurlybrace", "closecurlybracket", "}"]],
-			['shift + \\', ["verticalbar", "|"]],
-			['shift + ;', ["colon", ":"]],
-			['shift + \'', ["quotationmark", "\""]],
-			['shift + !,', ["openanglebracket", "<"]],
-			['shift + .', ["closeanglebracket", ">"]],
-			['shift + /', ["questionmark", "?"]]
+			// secondary key symbols
+			// ['shift + `', ["tilde", "~"]],
+			// ['shift + 1', ["exclamation", "exclamationpoint", "!"]],
+			// ['shift + 2', ["at", "@"]],
+			// ['shift + 3', ["number", "#"]],
+			// ['shift + 4', ["dollar", "dollars", "dollarsign", "$"]],
+			// ['shift + 5', ["percent", "%"]],
+			// ['shift + 6', ["caret", "^"]],
+			// ['shift + 7', ["ampersand", "and", "&"]],
+			// ['shift + 8', ["asterisk", "*"]],
+			// ['shift + 9', ["openparen", "("]],
+			// ['shift + 0', ["closeparen", ")"]],
+			// ['shift + -', ["underscore", "_"]],
+			// ['shift + =', ["plus", "+"]],
+			// ['shift + (', ["opencurlybrace", "opencurlybracket", "{"]],
+			// ['shift + )', ["closecurlybrace", "closecurlybracket", "}"]],
+			// ['shift + \\', ["verticalbar", "|"]],
+			// ['shift + ;', ["colon", ":"]],
+			// ['shift + \'', ["quotationmark", "\""]],
+			// ['shift + !,', ["openanglebracket", "<"]],
+			// ['shift + .', ["closeanglebracket", ">"]],
+			// ['shift + /', ["questionmark", "?"]]
 		]
 	};
 	//a-z and A-Z
 	for (aI = 65; aI <= 90; aI += 1) {
 		usLocale.map[aI] = String.fromCharCode(aI + 32);
-		usLocale.macros.push(['shift + ' + String.fromCharCode(aI + 32) + ', capslock + ' + String.fromCharCode(aI + 32), [String.fromCharCode(aI)]]);
+		// usLocale.macros.push(['shift + ' + String.fromCharCode(aI + 32) + ', capslock + ' + String.fromCharCode(aI + 32), [String.fromCharCode(aI)]]);
 	}
 	registerLocale('us', usLocale);
 	getSetLocale('us');
